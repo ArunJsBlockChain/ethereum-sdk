@@ -1,6 +1,6 @@
 {
-  "name": "@rarible/protocol-ethereum-sdk",
-  "version": "0.12.95",
+  "name": "@zodeak/ethereum-sdk",
+  "version": "0.0.7",
   "keywords": [
     "axios",
     "typescript",
@@ -65,5 +65,17 @@
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-  "gitHead": "e1a77d6596ee3286e6f2d7c1db5f69489c10f10c"
+  "description": "Ethereum SDK",
+  "directories": {
+    "example": "example"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArunJsBlockChain/ethereum-sdk.git"
+  },
+  "author": "Arun kumar JS",
+  "bugs": {
+    "url": "https://github.com/ArunJsBlockChain/ethereum-sdk/issues"
+  },
+  "homepage": "https://github.com/ArunJsBlockChain/ethereum-sdk#readme"
 }

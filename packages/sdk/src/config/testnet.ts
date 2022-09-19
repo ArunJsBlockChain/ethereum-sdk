@@ -8,17 +8,17 @@ export const testnetEthereumConfig: EthereumConfig = {
 	chainId: 4,
 	exchange: {
 		v1: toAddress("0xda381535565b97640a6453fa7a1a7b161af78cbe"),
-		v2: toAddress("0xd4a57a3bD3657D0d46B4C5bAC12b3F156B9B886b"),
+		v2: toAddress("0x4c3b3F91Fab7db15634E766fD5c3f91dfFf012A1"),//Our Contract
 		openseaV1: toAddress("0xdd54d660178b28f6033a953b0e55073cfa7e3744"),
 		wrapper: toAddress("0x3D830cB13043912af930587a471D6C9b32Aa42E9"),
 		looksrare: toAddress("0x1AA777972073Ff66DCFDeD85749bDD555C0665dA"),
 		x2y2: ZERO_ADDRESS,
 	},
 	transferProxies: {
-		nft: toAddress("0x7d47126a2600e22eab9ed6cf0e515678727779a6"),
-		erc20: toAddress("0x2fce8435f0455edc702199741411dbcd1b7606ca"),
-		erc721Lazy: toAddress("0x75fDbe19C2dc673384dDc14C9F453dB86F5f32E8"),
-		erc1155Lazy: toAddress("0x0cF0AAb68432a3710ECbf2f1b112a11cEe31a83C"),
+		nft: toAddress("0xE673C16a64C7464b057768f9A970851e262228af"),//Our Contract
+		erc20: toAddress("0x6371E28b3325EFaC77AEDF36485134C2802956Cc"),//Our Contract
+		erc721Lazy: toAddress("0x956c88034900240dF14f8DbF05c68075960C0434"),//Our Contract
+		erc1155Lazy: toAddress("0x517539bCBAE3daB6d7293A1b2DA264912255790B"),//Our Contract
 		openseaV1: toAddress("0xcdc9188485316bf6fa416d02b4f680227c50b89e"),
 		cryptoPunks: toAddress("0xfc2aa1b3365b8e0cac7a7d22fd7655e643792d17"),
 	},
@@ -29,8 +29,8 @@ export const testnetEthereumConfig: EthereumConfig = {
 		merkleValidator: toAddress("0x45b594792a5cdc008d0de1c1d69faa3d16b3ddc1"),
 	},
 	factories: {
-		erc721: toAddress("0x62e0BDC23435321adFf249d6f41e11AEee6486Cf"),
-		erc1155: toAddress("0xB1Bcf905495AFf06e854904d7b2d6647ab00Cd1d"),
+		erc721: toAddress("0x4e24860A2792CD8d7E867666fdcdbD81E36FfCD2"),//Our Contract
+		erc1155: toAddress("0x1fb7cA0c909fEaB39893dD60F8Bac1Ea48A62Ab2"),//Our Contract
 	},
 	cryptoPunks: {
 		marketContract: toAddress("0x85252f525456d3fce3654e56f6eaf034075e231c"),
