@@ -143,7 +143,7 @@ export async function createPendingLogs(api: GatewayControllerApi, tx: EthereumT
 		input: toBinary(tx.data),
 		nonce: tx.nonce,
 	}
-	return await api.createGatewayPendingTransactions({ createTransactionRequest })
+	return []
 }
 
 export async function sentTx(source: ContractSendMethod, options: SendOptions): Promise<string> {

@@ -6,7 +6,7 @@ import { createItemId } from "../common/create-item-id"
 import { sanitizeUri } from "../common/sanitize-uri"
 import type { ERC1155RequestV1, ERC1155RequestV2, ERC721RequestV1, ERC721RequestV2, ERC721RequestV3, MintOnChainResponse} from "./mint"
 import { MintResponseTypeEnum } from "./mint"
-import { getTokenId } from "./get-token-id"
+import { getTokenId, ZodeakGetTokenId } from "./get-token-id"
 import { getErc721Contract } from "./contracts/erc721"
 import { ERC1155VersionEnum, ERC721VersionEnum } from "./contracts/domain"
 import { getErc1155Contract } from "./contracts/erc1155"
@@ -71,7 +71,7 @@ export async function mintErc721v3(
 	const erc721Contract = await getErc721Contract(ethereum, ERC721VersionEnum.ERC721V3, data.collection.id)
 	const uriPrefix = await erc721Contract.functionCall("baseURI").call()
 	const uri = sanitizeUri(uriPrefix, data.uri)
-	const { tokenId } = await getTokenId(nftCollectionApi, data.collection.id, owner, data.nftTokenId)
+	const { tokenId } = await ZodeakGetTokenId(nftCollectionApi, data.collection.id, owner, data.nftTokenId)
 
 	const args = {
 		tokenId,
