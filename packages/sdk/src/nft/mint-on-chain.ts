@@ -125,7 +125,7 @@ export async function mintErc1155v2(
 	const creators = await getCreators(data, ethereum)
 	const owner = creators[0].account
 	const erc1155Contract = await getErc1155Contract(ethereum, ERC1155VersionEnum.ERC1155V2, data.collection.id)
-	const { tokenId } = await getTokenId(nftCollectionApi, data.collection.id, owner, data.nftTokenId)
+	const { tokenId } = await ZodeakGetTokenId(nftCollectionApi, data.collection.id, owner, data.nftTokenId)
 	const uriPrefix = await erc1155Contract.functionCall("baseURI").call()
 	const uri = sanitizeUri(uriPrefix, data.uri)
 
