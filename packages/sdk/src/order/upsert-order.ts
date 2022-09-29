@@ -29,6 +29,7 @@ import type { OrderFiller } from "./fill-order"
 import type { CheckLazyOrderPart } from "./check-lazy-order"
 import { createErc20Contract } from "./contracts/erc20"
 import type { SellUpdateRequest } from "./sell"
+import { upsertOrder } from "../zodeak-api-client"
 
 const ZERO = toWord("0x0000000000000000000000000000000000000000000000000000000000000000")
 
@@ -144,12 +145,11 @@ export class UpsertOrder {
 
 	async upsertRequest(checked: OrderForm): Promise<Order> {
 		const simple = UpsertOrder.orderFormToSimpleOrder(checked)
-		return this.orderApi.upsertOrder({
-			orderForm: {
-				...checked,
-				signature: await this.signOrder(simple),
-			},
+		const responseData = await upsertOrder({
+			...checked,
+			signature:await this.signOrder(simple)
 		})
+		return responseData.data
 	}
 
 	async prepareOrderForm(request: OrderRequest, isMakeFill: boolean): Promise<Omit<RaribleV2OrderForm, "take" | "make">> {

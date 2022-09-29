@@ -8,6 +8,7 @@ import type {
 } from "@rarible/ethereum-api-client"
 import type { Erc721LazyAssetType } from "@rarible/ethereum-api-client/build/models/AssetType"
 import type { Erc1155LazyAssetType } from "@rarible/ethereum-api-client/build/models/AssetType"
+import { getNftCollectionById } from "../zodeak-api-client"
 
 export type NftAssetType = {
 	contract: Address
@@ -30,15 +31,15 @@ export async function checkAssetType(
 	if ("assetClass" in asset) {
 		return asset
 	} else {
-		const collectionResponse = await collectionApi.getNftCollectionByIdRaw({ collection: asset.contract })
+		const collectionResponse = await getNftCollectionById(asset.contract)
 		if (collectionResponse.status === 200) {
-			switch (collectionResponse.value.type) {
+			switch (collectionResponse.data[0].type) {
 				case "ERC721":
 				case "ERC1155": {
 					return {
 						...asset,
 						tokenId: toBigNumber(`${asset.tokenId}`),
-						assetClass: collectionResponse.value.type,
+						assetClass: collectionResponse.data[0].type,
 					}
 				}
 				case "CRYPTO_PUNKS": {
@@ -49,7 +50,7 @@ export async function checkAssetType(
 					}
 				}
 				default: {
-					throw new Error(`Unrecognized collection asset class ${collectionResponse.value.type}`)
+					throw new Error(`Unrecognized collection asset class ${collectionResponse.data[0].type}`)
 				}
 			}
 		} else {

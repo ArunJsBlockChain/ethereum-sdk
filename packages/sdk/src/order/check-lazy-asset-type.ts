@@ -1,11 +1,12 @@
 import type { AssetType, NftItemControllerApi } from "@rarible/ethereum-api-client"
+import { getNftItemById } from "../zodeak-api-client"
 
 export async function checkLazyAssetType(itemApi: NftItemControllerApi, type: AssetType): Promise<AssetType> {
 	switch (type.assetClass) {
 		case "ERC1155":
 		case "ERC721": {
-			const itemResponse = await itemApi.getNftItemByIdRaw({ itemId: `${type.contract}:${type.tokenId}` })
-			if (itemResponse.status === 200 && itemResponse.value.lazySupply === "0") {
+			const itemResponse = await getNftItemById(`${type.contract}:${type.tokenId}`)
+			if (itemResponse.status === 200 && itemResponse.data.lazySupply === "0") {
 				return type
 			}
 			const lazyResponse = await itemApi.getNftLazyItemByIdRaw({ itemId: `${type.contract}:${type.tokenId}` })

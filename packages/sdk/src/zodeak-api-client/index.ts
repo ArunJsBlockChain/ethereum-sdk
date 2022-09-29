@@ -12,8 +12,23 @@ export const generateNftTokenId = async (tokenData:ITokenData) => {
   })
 }
 
-export const getNftCollectionById = async (tokenType:"ERC-721"| "ERC-1155") => {
-    return  await Get({
-        url:`getCollections/${tokenType}`
-    })
+export const getNftCollectionById = async (collectionId:string) => {
+  return  await Post({
+      url:`collections/getCollectionById`,
+      payload:{id:collectionId}
+  })
+}
+
+export const getNftItemById = async (itemId:string) => {
+  return  await Post({
+      url:`nft/getItemShortDetailsById`,
+      payload:{id:itemId}
+  })
+}
+
+export const upsertOrder = async (orders:any) => {
+  return await Post({
+    url:`orders/createOrder`,
+    payload:orders
+  })
 }
