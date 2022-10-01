@@ -8,7 +8,7 @@ export const testnetEthereumConfig: EthereumConfig = {
 	chainId: 4,
 	exchange: {
 		v1: toAddress("0xda381535565b97640a6453fa7a1a7b161af78cbe"),
-		v2: toAddress("0x4c3b3F91Fab7db15634E766fD5c3f91dfFf012A1"),//Our Contract
+		v2: toAddress("0x8f6cE84Dc2ACaA474C500769D612f8Ab6AAc2119"),//Our Contract
 		openseaV1: toAddress("0xdd54d660178b28f6033a953b0e55073cfa7e3744"),
 		wrapper: toAddress("0x3D830cB13043912af930587a471D6C9b32Aa42E9"),
 		looksrare: toAddress("0x1AA777972073Ff66DCFDeD85749bDD555C0665dA"),
