@@ -29,7 +29,7 @@ import type { OrderFiller } from "./fill-order"
 import type { CheckLazyOrderPart } from "./check-lazy-order"
 import { createErc20Contract } from "./contracts/erc20"
 import type { SellUpdateRequest } from "./sell"
-import { upsertOrder } from "../zodeak-api-client"
+import { getOrderByHash, upsertOrder } from "../zodeak-api-client"
 
 const ZERO = toWord("0x0000000000000000000000000000000000000000000000000000000000000000")
 
@@ -111,7 +111,8 @@ export class UpsertOrder {
 		if ("order" in hasOrder) {
 			return hasOrder.order
 		} else {
-			return this.orderApi.getOrderByHash({ hash: hasOrder.orderHash })
+			const response = await getOrderByHash(hasOrder.orderHash)
+			return response.data
 		}
 	}
 

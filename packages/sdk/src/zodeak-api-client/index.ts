@@ -32,3 +32,10 @@ export const upsertOrder = async (orders:any) => {
     payload:orders
   })
 }
+
+export const getOrderByHash = async (orderHash:string) => {
+  return await Post({
+      url:`order/getOrderByHash`,
+      payload:{hash:orderHash}
+  })
+}
