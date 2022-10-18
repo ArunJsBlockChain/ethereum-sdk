@@ -40,6 +40,6 @@ export const testnetEthereumConfig: EthereumConfig = {
 		pairFactory: toAddress("0xcB1514FE29db064fa595628E0BFFD10cdf998F33"),
 		pairRouter: toAddress("0x9ABDe410D7BA62fA11EF37984c0Faf2782FE39B5"),
 	},
-	weth: toAddress("0xc778417e063141139fce010982780140aa0cd5ab"),
+	weth: toAddress("0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6"),//Our Contract
 	auction: ZERO_ADDRESS,
 }
