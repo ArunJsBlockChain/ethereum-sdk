@@ -14,6 +14,7 @@ import { createItemId } from "../common/create-item-id"
 import { getErc721Contract } from "./contracts/erc721"
 import { ERC1155VersionEnum, ERC721VersionEnum } from "./contracts/domain"
 import { getErc1155Contract } from "./contracts/erc1155"
+import { getNftOwnershipById } from "../zodeak-api-client"
 
 export type BurnRequest = {
 	assetType: BurnAsset
@@ -36,10 +37,11 @@ export async function burn(
 	}
 	const checked = await checkAssetType(request.assetType)
 	const from = toAddress(await ethereum.getFrom())
-	const ownership = await apis.nftOwnership.getNftOwnershipByIdRaw({
-		ownershipId: getOwnershipId(request.assetType.contract, toBigNumber(`${request.assetType.tokenId}`), from),
-	})
-	if (ownership.status === 200) {
+
+	const ownershipResponse = await getNftOwnershipById(getOwnershipId(request.assetType.contract, toBigNumber(`${request.assetType.tokenId}`), from))
+	const ownership = ownershipResponse.data
+	
+	if (ownershipResponse.status === 200) {
 		const lazyValueBn = toBn(ownership.value.lazyValue)
 
 		if (lazyValueBn.gt(0)) {

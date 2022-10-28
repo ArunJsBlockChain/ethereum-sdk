@@ -17,6 +17,7 @@ import { transferErc721 } from "./transfer-erc721"
 import { transferErc1155 } from "./transfer-erc1155"
 import { transferNftLazy } from "./transfer-nft-lazy"
 import { transferCryptoPunk } from "./transfer-crypto-punk"
+import { getNftOwnershipById } from "../zodeak-api-client"
 
 export type TransferAsset = NftAssetType | Erc721AssetType | Erc1155AssetType
 
@@ -36,10 +37,10 @@ export async function transfer(
 		throw new Error("Wallet undefined")
 	}
 	const from = toAddress(await ethereum.getFrom())
-	const ownership = await nftOwnershipApi.getNftOwnershipByIdRaw({
-		ownershipId: getOwnershipId(initialAsset.contract, toBigNumber(`${initialAsset.tokenId}`), from),
-	})
-	if (ownership.status === 200) {
+	const ownershipResponse = await getNftOwnershipById(getOwnershipId(initialAsset.contract, toBigNumber(`${initialAsset.tokenId}`), from))
+	const ownership = ownershipResponse.data
+
+	if (ownershipResponse.status === 200) {
 		const asset = await checkAssetType(initialAsset)
 		if (toBn(ownership.value.lazyValue).gt(0)) {
 			if (asset.assetClass === "CRYPTO_PUNKS") {
