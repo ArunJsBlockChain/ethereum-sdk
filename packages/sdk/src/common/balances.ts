@@ -6,6 +6,7 @@ import type {
 import type { BigNumberValue } from "@rarible/utils"
 import { toBn } from "@rarible/utils"
 import type { RaribleEthereumApis } from "./apis"
+import { getEthBalance } from "../zodeak-api-client"
 
 export type BalanceRequestAssetType = EthAssetType | Erc20AssetType
 
@@ -17,14 +18,20 @@ export class Balances {
 	async getBalance(address: Address, assetType: BalanceRequestAssetType): Promise<BigNumberValue> {
 		switch (assetType.assetClass) {
 			case "ETH": {
-				const ethBalance = await this.apis.balances.getEthBalance({owner: address})
+				const ethBalanceResponse = await getEthBalance({
+					owner: address, 
+					networkId:"5"
+				})
+				const ethBalance = ethBalanceResponse.data
 				return toBn(ethBalance.decimalBalance)
 			}
 			case "ERC20": {
-				const balance = await this.apis.balances.getErc20Balance({
-					contract: assetType.contract,
-					owner: address,
+				const balanceResponse = await getEthBalance({
+					owner: address, 
+					networkId:"5", 
+					weth_address: assetType.contract
 				})
+				const balance = balanceResponse.data
 				return toBn(balance.decimalBalance)
 			}
 			default: throw new Error("Asset class is not supported")

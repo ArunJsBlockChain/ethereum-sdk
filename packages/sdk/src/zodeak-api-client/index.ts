@@ -5,6 +5,12 @@ interface ITokenData {
   collectionAddress:string
 }
 
+export interface IBalance{
+  weth_address?:string
+  owner:string
+  networkId:string
+}
+
 export const generateNftTokenId = async (tokenData:ITokenData) => {
   return  await Post({
       url:'tokenId/generateTokenId',
@@ -44,5 +50,19 @@ export const getNftOwnershipById = async (ownerShipId:string) => {
   return await Post({
       url:`items/getNftOwnershipId`,
       payload:{ownershipId:ownerShipId}
+  })
+}
+
+export const getEthBalance = async (data:IBalance) => {
+  return  await Post({
+      url:`balance/${data.owner}`,
+      payload:data
+  })
+}
+
+export const getWEthBalance = async (data:IBalance) => {
+  return  await Post({
+      url:`balance/${data.weth_address}/${data.owner}`,
+      payload:data
   })
 }
