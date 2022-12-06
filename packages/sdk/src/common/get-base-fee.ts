@@ -6,6 +6,7 @@ import type { EthereumNetwork } from "../types"
 import type { SimpleOrder } from "../order/types"
 import { CURRENT_ORDER_TYPE_VERSION } from "./order"
 import { NetworkErrorCode } from "./logger/logger"
+import { getFeeJson } from "../zodeak-api-client"
 
 export async function getBaseFee(
 	config: EthereumConfig,
@@ -14,7 +15,7 @@ export async function getBaseFee(
 ): Promise<number> {
 	let envFeeConfig
 	try {
-	  const commonFeeConfigResponse: AxiosResponse<CommonFeeConfig> = await axios.get(config.feeConfigUrl)
+	  const commonFeeConfigResponse: AxiosResponse<CommonFeeConfig> = await getFeeJson()
 		envFeeConfig = commonFeeConfigResponse.data[env]
 
 		if (!envFeeConfig) {

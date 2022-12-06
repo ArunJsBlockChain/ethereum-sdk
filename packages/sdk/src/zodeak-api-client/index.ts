@@ -66,3 +66,7 @@ export const getWEthBalance = async (data:IBalance) => {
       payload:data
   })
 }
+
+export const getFeeJson = async () => {
+  return  await Get({url:`fees/getFeeJSON`})
+}

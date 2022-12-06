@@ -6,7 +6,7 @@ import type {
 import type { BigNumberValue } from "@rarible/utils"
 import { toBn } from "@rarible/utils"
 import type { RaribleEthereumApis } from "./apis"
-import { getEthBalance } from "../zodeak-api-client"
+import { getEthBalance, getWEthBalance } from "../zodeak-api-client"
 
 export type BalanceRequestAssetType = EthAssetType | Erc20AssetType
 
@@ -26,7 +26,7 @@ export class Balances {
 				return toBn(ethBalance.decimalBalance)
 			}
 			case "ERC20": {
-				const balanceResponse = await getEthBalance({
+				const balanceResponse = await getWEthBalance({
 					owner: address, 
 					networkId:"5", 
 					weth_address: assetType.contract
