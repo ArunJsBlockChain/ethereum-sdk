@@ -8,16 +8,16 @@ export const mumbaiConfig: EthereumConfig = {
 	chainId: 80001,
 	exchange: {
 		v1: ZERO_ADDRESS,
-		v2: toAddress("0x2Fc743F5419637B93dDAC159715B902186300041"),
+		v2: toAddress("0x89660767725685A53ebF9B827A91666465044964"),//Our Contract
 		openseaV1: ZERO_ADDRESS,
 		wrapper: ZERO_ADDRESS,
 		x2y2: ZERO_ADDRESS,
 	},
 	transferProxies: {
-		nft: toAddress("0x02e21199D043dab90248f79d6A8d0c36832734B0"),
-		erc20: toAddress("0xCA90c2E7d3c41EF220888B0038849BA1e67688bC"),
-		erc721Lazy: toAddress("0xA8628124C255171cF356F0E0204E2D19CA89F636"),
-		erc1155Lazy: toAddress("0x8fd27f771bf72C1F8c8b78FCdcf323C0C34f030b"),
+		nft: toAddress("0x408CA22df1Ed41239583EEeF5CDC32383224aFdB"),//Our Contract
+		erc20: toAddress("0x81d06535205484cb32A0ab18B3c5415768cA2554"),//Our Contract
+		erc721Lazy: toAddress("0x4eE52442a3A3a8B06D59C53cE3C82948A209863A"),//Our Contract
+		erc1155Lazy: toAddress("0xbF576dB6DD8eAf08F2cCe03d20d520c489f23988"),//Our Contract
 		openseaV1: ZERO_ADDRESS,
 		cryptoPunks: ZERO_ADDRESS,
 	},
@@ -27,8 +27,8 @@ export const mumbaiConfig: EthereumConfig = {
 		proxyRegistry: ZERO_ADDRESS,
 	},
 	factories: {
-		erc721: toAddress("0xa85180a21786bA65b0778bE1cb5CBA5E5c6cD21d"),
-		erc1155: toAddress("0xAa9CD5834E0009902EeAA3FEfAc6A160e9A096b4"),
+		erc721: toAddress("0x22147191A6a5707ff7bcBe261ba5923d36Ac44F4"),//Our Contract
+		erc1155: toAddress("0xae814ab42B63C2f7c83993F22D1cdAFA2DD4265e"),//Our Contract
 	},
 	cryptoPunks: {
 		marketContract: ZERO_ADDRESS,
