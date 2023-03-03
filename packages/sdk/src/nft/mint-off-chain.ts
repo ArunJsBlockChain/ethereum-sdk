@@ -5,7 +5,7 @@ import type { Part } from "@rarible/ethereum-api-client"
 import { sanitizeUri } from "../common/sanitize-uri"
 import { getBlockchainFromChainId } from "../common/get-blockchain-from-chain-id"
 import type { SimpleLazyNft } from "./sign-nft"
-import { getTokenId } from "./get-token-id"
+import { getTokenId, ZodeakGetTokenId } from "./get-token-id"
 import type { ERC1155RequestV2, ERC721RequestV3, MintOffChainResponse} from "./mint"
 import { MintResponseTypeEnum } from "./mint"
 import { getCreators } from "./mint-on-chain"
@@ -25,7 +25,7 @@ export async function mintOffChain(
 	}
 
 	const creators = await getCreators(data, ethereum)
-	const { tokenId } = await getTokenId(nftCollectionApi, data.collection.id, creators[0].account, data.nftTokenId)
+	const { tokenId } = await ZodeakGetTokenId(nftCollectionApi, data.collection.id, creators[0].account, data.nftTokenId)
 
 	const mintData = getMintOffChainData({
 		...data,
