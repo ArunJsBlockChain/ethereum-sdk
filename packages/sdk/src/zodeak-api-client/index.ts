@@ -8,7 +8,6 @@ interface ITokenData {
 export interface IBalance{
   weth_address?:string
   owner:string
-  networkId:string
 }
 
 export const generateNftTokenId = async (tokenData:ITokenData) => {

@@ -19,8 +19,7 @@ export class Balances {
 		switch (assetType.assetClass) {
 			case "ETH": {
 				const ethBalanceResponse = await getEthBalance({
-					owner: address, 
-					networkId:"5"
+					owner: address
 				})
 				const ethBalance = ethBalanceResponse.data
 				return toBn(ethBalance.decimalBalance)
@@ -28,7 +27,6 @@ export class Balances {
 			case "ERC20": {
 				const balanceResponse = await getWEthBalance({
 					owner: address, 
-					networkId:"5", 
 					weth_address: assetType.contract
 				})
 				const balance = balanceResponse.data
