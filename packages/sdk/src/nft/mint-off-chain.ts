@@ -12,6 +12,7 @@ import { getCreators } from "./mint-on-chain"
 import { getErc721Contract } from "./contracts/erc721"
 import { ERC1155VersionEnum, ERC721VersionEnum } from "./contracts/domain"
 import { getErc1155Contract } from "./contracts/erc1155"
+import { nftLazyMint } from "../zodeak-api-client"
 
 export async function mintOffChain(
 	ethereum: Ethereum,
@@ -31,12 +32,14 @@ export async function mintOffChain(
 		...data,
 		uri: await getRequestURI(ethereum, data),
 	}, creators, tokenId)
-	const minted = await nftLazyMintApi.mintNftAsset({
-		lazyNft: Object.assign({}, mintData, {
+	const mintedResponse = await nftLazyMint(
+		Object.assign({}, mintData, {
 			tokenId,
 			signatures: [await signNft(mintData)],
 		}),
-	})
+	)
+	const minted  = mintedResponse.data
+
 	return {
 		type: MintResponseTypeEnum.OFF_CHAIN,
 		item: minted,

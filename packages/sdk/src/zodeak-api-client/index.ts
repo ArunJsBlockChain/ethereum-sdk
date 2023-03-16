@@ -11,21 +11,21 @@ export interface IBalance{
 }
 
 export const generateNftTokenId = async (tokenData:ITokenData) => {
-  return  await Post({
+  return await Post({
       url:'tokenId/generateTokenId',
       payload: tokenData
   })
 }
 
 export const getNftCollectionById = async (collectionId:string) => {
-  return  await Post({
+  return await Post({
       url:`collections/getCollectionById`,
       payload:{id:collectionId}
   })
 }
 
 export const getNftItemById = async (itemId:string) => {
-  return  await Post({
+  return await Post({
       url:`nft/getItemShortDetailsById`,
       payload:{id:itemId}
   })
@@ -53,19 +53,33 @@ export const getNftOwnershipById = async (ownerShipId:string) => {
 }
 
 export const getEthBalance = async (data:IBalance) => {
-  return  await Post({
+  return await Post({
       url:`balance/${data.owner}`,
       payload:data
   })
 }
 
 export const getWEthBalance = async (data:IBalance) => {
-  return  await Post({
+  return await Post({
       url:`balance/${data.weth_address}/${data.owner}`,
       payload:data
   })
 }
 
 export const getFeeJson = async () => {
-  return  await Get({url:`fees/getFeeJSON`})
+  return await Get({url:`fees/getFeeJSON`})
+}
+
+export const nftLazyMint = async (data:any) => {
+  return await Post({
+    url:`NFT/nftLazyMint`,
+    payload:data
+  })
+}
+
+export const getNftLazyItemById = async (data:any) => {
+  return await Post({
+    url:`/nft/getNftLazyItemById`,
+    payload:data
+  })
 }
