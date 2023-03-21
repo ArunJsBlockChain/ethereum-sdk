@@ -42,7 +42,7 @@ export async function transfer(
 
 	if (ownershipResponse.status === 200) {
 		const asset = await checkAssetType(initialAsset)
-		if (toBn(ownership.value.lazyValue).gt(0)) {
+		if (toBn(ownership.lazyValue).gt(0)) {
 			if (asset.assetClass === "CRYPTO_PUNKS") {
 				throw new Error("CRYPTO_PUNKS can't be lazy")
 			}

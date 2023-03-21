@@ -6,6 +6,7 @@ import type { TransferAsset } from "./transfer"
 import { getErc721Contract } from "./contracts/erc721"
 import { ERC1155VersionEnum, ERC721VersionEnum } from "./contracts/domain"
 import { getErc1155Contract } from "./contracts/erc1155"
+import { getNftLazyItemById } from "../zodeak-api-client"
 
 export async function transferNftLazy(
 	ethereum: Ethereum,
@@ -16,9 +17,9 @@ export async function transferNftLazy(
 	to: Address,
 	amount?: BigNumber
 ): Promise<EthereumTransaction> {
-	const lazyNft = await nftItemApi.getNftLazyItemById({
-		itemId: `${asset.contract}:${asset.tokenId}`,
-	})
+	const lazyItemResponse = await getNftLazyItemById({ itemId: `${asset.contract}:${asset.tokenId}` })
+	const lazyNft = lazyItemResponse.data
+	
 	const params = {
 		tokenId: lazyNft.tokenId,
 		tokenURI: lazyNft.uri,
