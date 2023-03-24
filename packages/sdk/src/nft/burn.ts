@@ -14,7 +14,7 @@ import { createItemId } from "../common/create-item-id"
 import { getErc721Contract } from "./contracts/erc721"
 import { ERC1155VersionEnum, ERC721VersionEnum } from "./contracts/domain"
 import { getErc1155Contract } from "./contracts/erc1155"
-import { getNftOwnershipById } from "../zodeak-api-client"
+import { deleteLazyMintNft, getNftOwnershipById } from "../zodeak-api-client"
 
 export type BurnRequest = {
 	assetType: BurnAsset
@@ -42,26 +42,27 @@ export async function burn(
 	const ownership = ownershipResponse.data
 	
 	if (ownershipResponse.status === 200) {
-		const lazyValueBn = toBn(ownership.value.lazyValue)
+		const lazyValueBn = toBn(ownership.lazyValue)
 
 		if (lazyValueBn.gt(0)) {
 
-			if (!lazyValueBn.isEqualTo(ownership.value.value)) {
+			if (!lazyValueBn.isEqualTo(ownership.value)) {
 				throw new Error("Unable to burn lazy minted item")
 			}
 			const creators = !request.creators || !request.creators.length
 				? [from]
 				: request.creators?.map(creator => creator.account)
 
-			return apis.nftItem.deleteLazyMintNftAsset({
+		    const burnResponse = await deleteLazyMintNft({
 				itemId: createItemId(request.assetType.contract, toBigNumber(`${request.assetType.tokenId}`)),
-				burnLazyNftForm: {
-					creators,
-					signatures: [
-						toBinary(await ethereum.personalSign(`I would like to burn my ${request.assetType.tokenId} item.`)),
-					],
-				},
+				creators,
+				signatures: [
+					toBinary(await ethereum.personalSign(`I would like to burn my ${request.assetType.tokenId} item.`)),
+				],
+				value:ownership.lazyValue
 			})
+
+			return burnResponse.data
 		}
 
 		switch (checked.assetClass) {

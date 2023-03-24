@@ -83,3 +83,10 @@ export const getNftLazyItemById = async (data:any) => {
     payload:data
   })
 }
+
+export const deleteLazyMintNft = async (data:any) => {
+  return await Post({
+    url:`NFT/deleteLazyMintNft`,
+    payload:data
+  })
+}
