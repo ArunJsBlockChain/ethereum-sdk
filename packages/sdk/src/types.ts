@@ -8,6 +8,8 @@ export type EthereumNetwork =
   | "polygon"
   | "dev-ethereum"
   | "dev-polygon"
+  | "bscTestnet"
+  | "binance"
 
 export enum LogsLevel {
 	DISABLED = 0,

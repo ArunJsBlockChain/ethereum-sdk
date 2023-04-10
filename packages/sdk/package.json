@@ -1,6 +1,6 @@
 {
   "name": "@zodeak/ethereum-sdk",
-  "version": "0.3.7",
+  "version": "0.3.9",
   "keywords": [
     "axios",
     "typescript",
